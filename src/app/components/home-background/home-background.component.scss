@@ -1,0 +1,12 @@
+#home-background {
+  min-height: 90vh;
+  background-image: url('/background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  padding-left: 10vw;
+  padding-right: 10vw;
+}
