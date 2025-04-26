@@ -1,6 +1,6 @@
 #home-background {
   min-height: 90vh;
-  background-image: url('/background.png');
+  background-image: url('/football.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center bottom;
@@ -9,4 +9,8 @@
   align-items: center;
   padding-left: 10vw;
   padding-right: 10vw;
+
+  h1, p {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.75);
+  }
 }
