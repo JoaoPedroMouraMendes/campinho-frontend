@@ -2,15 +2,15 @@
   <div class="card-header bg-success"></div>
   <div class="card-body">
     <h5 class="card-title mb-4">
-      Reservado por: <strong>{{reservedBy}}</strong>
+      Reservado por: <strong>{{reservation?.reservedBy}}</strong>
     </h5>
     <p class="card-text mb-3 d-flex align-items-center breadcrumb">
       <span class="material-symbols-outlined me-1">calendar_month</span>
-      {{date}}
+      {{reservation?.startTime | date:'dd/MM/yyyy'}}
     </p>
     <p class="card-text d-flex align-items-center breadcrumb">
       <span class="material-symbols-outlined me-1">schedule</span>
-      <strong>{{startTime}}</strong>&nbsp;até&nbsp;<strong>{{endTime}}</strong>
+      <strong>{{reservation?.startTime | date:'HH:mm'}}</strong>&nbsp;até&nbsp;<strong>{{reservation?.endTime | date:'HH:mm'}}</strong>
     </p>
     <span class="badge bg-success p-2">Confirmado</span>
   </div>

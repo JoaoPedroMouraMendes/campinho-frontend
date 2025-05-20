@@ -1,18 +1,13 @@
 <section class="container my-5 py-5" id="reservation-container">
   <div class="row gap-5 justify-content-center justify-content-md-start">
     @for(reservation of currentReservations; track reservation.id) {
-    <app-reservation-card
-      class="col reservation-card"
-      [reservedBy]="reservation.reservedBy"
-      [date]="reservation.startTime | date:'dd/MM/yyyy'"
-      [startTime]="reservation.startTime | date:'HH:mm'"
-      [endTime]="reservation.endTime | date:'HH:mm'">
-    </app-reservation-card>
+    <app-reservation-card class="col reservation-card" [reservation]="reservation"></app-reservation-card>
     }
     @empty {
     <div class="card bg-warning-subtle border-warning text-warning-emphasis mt-5" id="empty-schedule">
       <div class="card-body text-center">
         <h5>Não há reservas na agenda no momento.</h5>
+
       </div>
     </div>
     }

@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { ReservationCardComponent } from '../reservation-card/reservation-card.component';
 import { Reservation } from '../../core/types/reservation.type';
 import { ReservationService } from '../../core/services/reservation.service';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-reservation-container',
-  imports: [ReservationCardComponent, DatePipe],
+  imports: [ReservationCardComponent],
   templateUrl: './reservation-container.component.html',
   styleUrl: './reservation-container.component.scss'
 })
