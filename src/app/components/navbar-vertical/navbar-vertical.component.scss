@@ -1,0 +1,14 @@
+.navbar-vertical {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-right: 2px solid white;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    position: static;
+  }
+}

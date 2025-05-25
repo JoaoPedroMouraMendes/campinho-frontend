@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ReservationCardComponent } from '../reservation-card/reservation-card.component';
 import { Reservation } from '../../core/types/reservation.type';
-import { ReservationService } from '../../core/services/reservation.service';
+import { ReservationService } from '../../core/services/reservation/reservation.service';
 
 @Component({
   selector: 'app-reservation-container',

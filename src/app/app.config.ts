@@ -1,16 +1,16 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { dateInterceptor } from './core/interceptors/date.interceptor';
+import { dateInterceptor } from './core/interceptors/date/date.interceptor';
+import { tokenInterceptor } from './core/interceptors/token/token.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(
-      withInterceptors([dateInterceptor])
+      withInterceptors([dateInterceptor, tokenInterceptor])
     )
   ]
 };

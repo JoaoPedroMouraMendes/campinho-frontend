@@ -1,0 +1,62 @@
+<app-fixed-button data-bs-toggle="modal" data-bs-target="#create-reservation"></app-fixed-button>
+
+<div class="modal fade" id="create-reservation" data-bs-backdrop="static" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Nova reserva</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (submit)="submit($event)" id="reservation-form" [formGroup]="form">
+          @if (errorMessage != '') {
+            <div class="text-danger" >
+              {{errorMessage}}
+            </div>
+          }
+          <div class="mb-3">
+            <label for="reserved-by" class="col-form-label">Reservado por:</label>
+            <input type="text" id="reserved-by" class="form-control" formControlName="reservedBy">
+            @if (submitAttempted && form.get('reservedBy')?.invalid) {
+            <div class="text-danger mt-1">
+              Campo obrigatório
+            </div>
+            }
+          </div>
+          <div class="mb-3">
+            <label for="date" class="col-form-label">Data</label>
+            <input type="date" id="date" class="form-control" formControlName="date">
+            @if (submitAttempted && form.get('date')?.invalid) {
+            <div class="text-danger mt-1">
+              Campo obrigatório
+            </div>
+            }
+          </div>
+          <div class="mb-3">
+            <label for="start-time" class="col-form-label">Horário de início</label>
+            <input type="time" id="start-time" class="form-control" formControlName="startTime">
+            @if (submitAttempted && form.get('startTime')?.invalid) {
+            <div class="text-danger mt-1">
+              Campo obrigatório
+            </div>
+            }
+          </div>
+          <div class="mb-3">
+            <label for="end-time" class="col-form-label">Horário de termino</label>
+            <input type="time" id="end-time" class="form-control" formControlName="endTime">
+            @if (submitAttempted && form.get('endTime')?.invalid) {
+            <div class="text-danger mt-1">
+              Campo obrigatório
+            </div>
+            }
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="submit" class="btn btn-primary" form="reservation-form">Criar reserva</button>
+      </div>
+    </div>
+  </div>
+</div>

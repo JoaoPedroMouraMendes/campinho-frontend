@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { Reservation } from '../../core/types/reservation.type';
 import { DatePipe } from '@angular/common';
 
