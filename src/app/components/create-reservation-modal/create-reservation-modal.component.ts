@@ -56,6 +56,8 @@ export class CreateReservationModalComponent {
 
         this.form.reset()
         this.submitAttempted = false
+        // Recarrega as reservas disponiveis
+        this.reservationService.loadCurrentReservations()
       },
       error: error => {
         // Adiciona mensagem de erro
