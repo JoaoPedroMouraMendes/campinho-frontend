@@ -1,17 +1,16 @@
-@import '../../app.component.scss';
-
 .reservation-card {
-    min-width: 25rem;
-    max-width: 25rem;
+  min-width: 25rem;
+  max-width: 25rem;
 
-    @media (max-width: 576px) {
-      min-width: 80vw;
-      max-width: 80vw;
-    }
+  @media (max-width: 576px) {
+    min-width: 80vw;
+    max-width: 80vw;
   }
+}
 
-  #empty-schedule {
-    @media (max-width: 576px) {
-      width: 80vw;
-    }
+#empty-schedule {
+  @media (max-width: 576px) {
+    width: 80vw;
   }
+}
+

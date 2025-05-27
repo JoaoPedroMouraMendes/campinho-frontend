@@ -3,10 +3,11 @@ import { FixedButtonComponent } from '../fixed-button/fixed-button.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ReservationService } from '../../core/services/reservation/reservation.service';
 import { CreateReservation } from '../../core/types/createReservation.type';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-reservation-modal',
-  imports: [FixedButtonComponent, ReactiveFormsModule],
+  imports: [FixedButtonComponent, ReactiveFormsModule, MatSnackBarModule],
   templateUrl: './create-reservation-modal.component.html',
   styleUrl: './create-reservation-modal.component.scss'
 })
@@ -15,8 +16,10 @@ export class CreateReservationModalComponent {
   submitAttempted: boolean = false;
   form: FormGroup;
   reservationService = inject(ReservationService)
+  fb = inject(FormBuilder)
+  snackBar = inject(MatSnackBar)
 
-  constructor(private fb: FormBuilder) {
+  constructor() {
     this.form = this.fb.group(
       {
         reservedBy: ['', Validators.required],
@@ -58,10 +61,14 @@ export class CreateReservationModalComponent {
         this.submitAttempted = false
         // Recarrega as reservas disponiveis
         this.reservationService.loadCurrentReservations()
+        // Da um feedback ao usuário que a reserva foi criado com sucesso
+        this.snackBar.open('Reserva criado com sucesso', '', { duration: 3000, panelClass: 'text-bg-success' })
       },
       error: error => {
         // Adiciona mensagem de erro
         this.errorMessage = error.error.detail
+        // Da um feedback ao usuário que houve um erro ao tentar criar uma reversa
+        this.snackBar.open('Ocorreu um erro ao tentar criar a reserva', '', { duration: 3000, panelClass: 'text-bg-danger' })
       }
     })
   }

@@ -1,15 +1,13 @@
-<app-fixed-button data-bs-toggle="modal" data-bs-target="#create-reservation"></app-fixed-button>
-
-<div class="modal fade" id="create-reservation" data-bs-backdrop="static" tabindex="-1"
-  aria-labelledby="createReservation" aria-hidden="true">
+<div class="modal fade" id="edit-reservation" data-bs-backdrop="static" tabindex="-1"
+  aria-labelledby="editReservation" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Nova reserva</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="form.reset()"></button>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Alterar reserva</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form (submit)="submit($event)" id="create-reservation-form" [formGroup]="form">
+        <form (submit)="submit($event)" id="edit-reservation-form" [formGroup]="form">
           @if (errorMessage != '') {
             <div class="text-danger" >
               {{errorMessage}}
@@ -54,8 +52,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="form.reset()" >Fechar</button>
-        <button type="submit" class="btn btn-primary" form="create-reservation-form">Criar reserva</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="submit" class="btn btn-primary" form="edit-reservation-form" data-bs-dismiss="modal">Editar reserva</button>
       </div>
     </div>
   </div>

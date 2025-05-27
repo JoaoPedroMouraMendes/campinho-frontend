@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Reservation } from '../../types/reservation.type';
 import { CreateReservation } from '../../types/createReservation.type';
+import { UpdateReservation } from '../../types/updateReservation.type';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,13 @@ export class ReservationService {
 
   deleteReservation(reservationId: string): Observable<Object> {
     return this.http.delete(`${this.apiUrl}/api/reservation/${reservationId}`)
+  }
+
+  editReservation(editedReservation: UpdateReservation, reservationId: string): Observable<Object> {
+    return this.http.put(`${this.apiUrl}/api/reservation/${reservationId}`, editedReservation, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
   }
 }

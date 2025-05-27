@@ -1,0 +1,22 @@
+<div class="card shadow-sm rounded-4 border-0 overflow-hidden">
+  <div class="card-header bg-success text-white">
+  </div>
+  <div class="card-body">
+    <h5 class="card-title mb-4">
+      Reservado por: <strong>{{reservation?.reservedBy}}</strong>
+    </h5>
+    <p class="card-text mb-3 d-flex align-items-center breadcrumb">
+      <span class="material-symbols-outlined me-1">calendar_month</span>
+      {{reservation?.startTime | date:'dd/MM/yyyy'}}
+    </p>
+    <p class="card-text d-flex align-items-center breadcrumb">
+      <span class="material-symbols-outlined me-1">schedule</span>
+      <strong>{{reservation?.startTime | date:'HH:mm'}}</strong>&nbsp;até&nbsp;<strong>{{reservation?.endTime | date:'HH:mm'}}</strong>
+    </p>
+    <span class="badge bg-success p-2">Confirmado</span>
+  </div>
+  <div class="card-footer d-flex justify-content-between column-gap-1">
+    <button class="btn btn btn-outline-danger w-50" (click)="deleteReservation()" >Excluir</button>
+    <button class="btn btn-outline-secondary w-50" (click)="editReservation()" data-bs-toggle="modal" data-bs-target="#edit-reservation">Editar</button>
+  </div>
+</div>

@@ -1,28 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NavbarVerticalComponent } from '../../components/navbar-vertical/navbar-vertical.component';
 import { ReservationService } from '../../core/services/reservation/reservation.service';
 import { Reservation } from '../../core/types/reservation.type';
-import { ReservationCardComponent } from '../../components/reservation-card/reservation-card.component';
 import { CreateReservationModalComponent } from '../../components/create-reservation-modal/create-reservation-modal.component';
+import { ReservationCardAdminComponent } from '../../components/reservation-card-admin/reservation-card-admin.component';
+import { EditReservationModalComponent } from '../../components/edit-reservation-modal/edit-reservation-modal.component';
 
 @Component({
   selector: 'app-admin',
-  imports: [NavbarVerticalComponent, ReservationCardComponent, CreateReservationModalComponent],
+  imports: [NavbarVerticalComponent, ReservationCardAdminComponent, CreateReservationModalComponent, EditReservationModalComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'
 })
 export class AdminComponent {
+  selectedReservationToEdit?: Reservation
   currentReservations?: Reservation[]
+  reservationService = inject(ReservationService)
 
-  constructor(private readonly reservationService: ReservationService) { }
+  constructor() { }
 
-  ngOnInit() {
-    try {
-      this.reservationService.getCurrentReservations().subscribe(response => {
-        this.currentReservations = response
-      })
-    } catch (error) {
-      console.log(`Ocorreu um erro ao tentar buscar as reservas atuais: ${error}`)
-    }
+  openEditModal(reservation: Reservation) {
+    this.selectedReservationToEdit = reservation
   }
 }

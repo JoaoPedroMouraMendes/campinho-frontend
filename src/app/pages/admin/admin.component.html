@@ -1,8 +1,8 @@
 <app-navbar-vertical></app-navbar-vertical>
 <div class="navbar-vertical-main-content">
   <section class="row gap-5 justify-content-center justify-content-md-start p-5">
-    @for(reservation of currentReservations; track reservation.id) {
-    <app-reservation-card class="col reservation-card" [reservation]="reservation"></app-reservation-card>
+    @for(reservation of reservationService.reservations; track reservation.id) {
+    <app-reservation-card-admin class="col reservation-card" [reservation]="reservation" (edit)="openEditModal($event)"></app-reservation-card-admin>
     }
     @empty {
     <div class="card bg-warning-subtle border-warning text-warning-emphasis mt-5" id="empty-schedule">
@@ -14,3 +14,4 @@
   </section>
 </div>
 <app-create-reservation-modal></app-create-reservation-modal>
+<app-edit-reservation-modal [reservation]="selectedReservationToEdit" ></app-edit-reservation-modal>
