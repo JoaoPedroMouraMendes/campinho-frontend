@@ -3,12 +3,13 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginCredentials } from '../../types/login-credentials.type';
 import { StorageService } from '../storage/storage.service';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  apiUrl = 'http://localhost:8080'
+  apiUrl = environment.backendUrl
   http = inject(HttpClient)
   storageService = inject(StorageService)
 

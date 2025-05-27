@@ -4,12 +4,13 @@ import { Observable } from 'rxjs';
 import { Reservation } from '../../types/reservation.type';
 import { CreateReservation } from '../../types/createReservation.type';
 import { UpdateReservation } from '../../types/updateReservation.type';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
-  apiUrl = 'http://localhost:8080'
+  apiUrl = environment.backendUrl
   http = inject(HttpClient)
   reservations?: Reservation[]
 
