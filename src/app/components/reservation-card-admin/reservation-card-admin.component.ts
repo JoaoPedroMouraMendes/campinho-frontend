@@ -3,6 +3,7 @@ import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Reservation } from '../../core/types/reservation.type';
 import { ReservationService } from '../../core/services/reservation/reservation.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Modal } from 'bootstrap';
 
 @Component({
   selector: 'app-reservation-card-admin',
@@ -35,4 +36,12 @@ export class ReservationCardAdminComponent {
   editReservation() {
     this.edit.emit(this.reservation)
   }
+
+  openModal() {
+  const modalElement = document.getElementById('edit-reservation');
+  if (modalElement) {
+    const modal = new Modal(modalElement);
+    modal.show();
+  }
+}
 }

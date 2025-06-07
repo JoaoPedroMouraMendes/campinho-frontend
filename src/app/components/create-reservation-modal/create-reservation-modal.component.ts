@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ReservationService } from '../../core/services/reservation/reservation.service';
 import { CreateReservation } from '../../core/types/createReservation.type';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Modal } from 'bootstrap';
 
 @Component({
   selector: 'app-create-reservation-modal',
@@ -42,6 +43,7 @@ export class CreateReservationModalComponent {
     // Obtem os inputs do form
     const { reservedBy, date, startTime, endTime } = this.form.value
 
+    // TODO resolver bug de fuso horário, ao enviar o objeto de data diretamente ele é enviado no padrão UTC e o backend converte para o horário de São Paulo porém a data já está no horário certo.
     const startDateTime = new Date(`${date}T${startTime}`)
     const endDateTime = new Date(`${date}T${endTime}`)
 
@@ -54,11 +56,11 @@ export class CreateReservationModalComponent {
     // Tenta criar uma reserva
     this.reservationService.createReservation(newReservation).subscribe({
       next: response => {
+        this.submitAttempted = false
         // Remove a mensagem de erro
         this.errorMessage = ''
-
+        // Remove os valores dos inputs
         this.form.reset()
-        this.submitAttempted = false
         // Recarrega as reservas disponiveis
         this.reservationService.loadCurrentReservations()
         // Da um feedback ao usuário que a reserva foi criado com sucesso
@@ -71,5 +73,24 @@ export class CreateReservationModalComponent {
         this.snackBar.open('Ocorreu um erro ao tentar criar a reserva', '', { duration: 3000, panelClass: 'text-bg-danger' })
       }
     })
+
+    // Fecha o modal
+    this.closeModal()
+  }
+
+  openModal() {
+    const modalElement = document.getElementById('create-reservation');
+    if (modalElement) {
+      const modal = new Modal(modalElement);
+      modal.show();
+    }
+  }
+
+  closeModal() {
+    const modalElement = document.getElementById('create-reservation')
+    if (modalElement) {
+      const modal = Modal.getInstance(modalElement)
+      modal?.hide()
+    }
   }
 }

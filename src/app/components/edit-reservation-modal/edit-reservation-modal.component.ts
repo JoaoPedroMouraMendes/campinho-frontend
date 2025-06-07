@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ReservationService } from '../../core/services/reservation/reservation.service';
 import { UpdateReservation } from '../../core/types/updateReservation.type';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Modal } from 'bootstrap';
 
 @Component({
   selector: 'app-edit-reservation-modal',
@@ -55,9 +56,15 @@ export class EditReservationModalComponent {
   submit(event: SubmitEvent) {
     event.preventDefault()
 
+    this.submitAttempted = true
+
+    if (this.form.invalid) {
+      return;
+    }
+
     // Obtem os inputs do form
     const { reservedBy, date, startTime, endTime } = this.form.value
-
+      // TODO resolver bug de fuso horário, ao enviar o objeto de data diretamente ele é enviado no padrão UTC e o backend converte para o horário de São Paulo porém a data já está no horário certo.
     const startDateTime = new Date(`${date}T${startTime}`)
     const endDateTime = new Date(`${date}T${endTime}`)
 
@@ -69,6 +76,7 @@ export class EditReservationModalComponent {
 
     this.reservationService.editReservation(newReservation, this.reservation?.id ?? '').subscribe({
       next: response => {
+        this.submitAttempted = false
         // Da um feedback ao usuário que a reserva foi alterada com sucesso
         this.snackBar.open('Reserva alterada com sucesso', '', { duration: 3000, panelClass: 'text-bg-success' })
         // Recarrega as reservas
@@ -79,5 +87,23 @@ export class EditReservationModalComponent {
         this.snackBar.open('Ocorreu um erro ao tentar alterar a reserva', '', { duration: 3000, panelClass: 'text-bg-danger' })
       }
     })
+
+    this.closeModal()
+  }
+
+  openModal() {
+    const modalElement = document.getElementById('edit-reservation')
+    if (modalElement) {
+      const modal = new Modal(modalElement)
+      modal.show()
+    }
+  }
+
+  closeModal() {
+    const modalElement = document.getElementById('edit-reservation')
+    if (modalElement) {
+      const modal = Modal.getInstance(modalElement)
+      modal?.hide()
+    }
   }
 }

@@ -17,6 +17,6 @@
   </div>
   <div class="card-footer d-flex justify-content-between column-gap-1">
     <button class="btn btn btn-outline-danger w-50" (click)="deleteReservation()" >Excluir</button>
-    <button class="btn btn-outline-secondary w-50" (click)="editReservation()" data-bs-toggle="modal" data-bs-target="#edit-reservation">Editar</button>
+    <button class="btn btn-outline-secondary w-50" (click)="editReservation()" data-bs-toggle="modal" (click)="openModal()">Editar</button>
   </div>
 </div>
