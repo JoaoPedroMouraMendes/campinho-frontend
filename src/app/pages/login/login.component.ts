@@ -38,7 +38,6 @@ export class LoginComponent {
 
     this.authService.login(this.form.value).subscribe({
       next: response => {
-        console.log(response)
         // Armazena o token de acesso e o cargo
         this.storageService.saveToken(response.token)
         this.storageService.saveRole(response.role)
