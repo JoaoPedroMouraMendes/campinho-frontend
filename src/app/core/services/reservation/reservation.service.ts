@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Reservation } from '../../types/reservation.type';
-import { CreateReservation } from '../../types/createReservation.type';
-import { UpdateReservation } from '../../types/updateReservation.type';
+import { CreateReservation } from '../../types/create-reservation.type';
+import { UpdateReservation } from '../../types/update-reservation.type';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({

@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FixedButtonComponent } from '../fixed-button/fixed-button.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ReservationService } from '../../core/services/reservation/reservation.service';
-import { CreateReservation } from '../../core/types/createReservation.type';
+import { CreateReservation } from '../../core/types/create-reservation.type';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Modal } from 'bootstrap';
 
@@ -43,9 +43,8 @@ export class CreateReservationModalComponent {
     // Obtem os inputs do form
     const { reservedBy, date, startTime, endTime } = this.form.value
 
-    // TODO resolver bug de fuso horário, ao enviar o objeto de data diretamente ele é enviado no padrão UTC e o backend converte para o horário de São Paulo porém a data já está no horário certo.
-    const startDateTime = new Date(`${date}T${startTime}`)
-    const endDateTime = new Date(`${date}T${endTime}`)
+    const startDateTime = `${date}T${startTime}`
+    const endDateTime = `${date}T${endTime}`
 
     const newReservation: CreateReservation = {
       reservedBy: reservedBy,
@@ -65,17 +64,16 @@ export class CreateReservationModalComponent {
         this.reservationService.loadCurrentReservations()
         // Da um feedback ao usuário que a reserva foi criado com sucesso
         this.snackBar.open('Reserva criado com sucesso', '', { duration: 3000, panelClass: 'text-bg-success' })
+        // Fecha o modal
+        this.closeModal()
       },
       error: error => {
-        // Adiciona mensagem de erro
+        // Adiciona mensagem de erro no modal
         this.errorMessage = error.error.detail
         // Da um feedback ao usuário que houve um erro ao tentar criar uma reversa
         this.snackBar.open('Ocorreu um erro ao tentar criar a reserva', '', { duration: 3000, panelClass: 'text-bg-danger' })
       }
     })
-
-    // Fecha o modal
-    this.closeModal()
   }
 
   openModal() {
